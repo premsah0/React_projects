@@ -15,16 +15,9 @@ function TodoForm() {
   return (
     <form onSubmit={add} className="flex">
       <input
-        type="checkbox"
-        value=""
-        className="sr-only peer"
-        onChange={onChangeBtn}
-        checked={themeMode === "dark"}
-      />
-      <input
         type="text"
         placeholder="Write Todo..."
-        className="w-full border border-black/10 rounded-l-lg px-3 outline-none duration-150 bg-white/20 py-1.5"
+        className="w-full border border-red-700 rounded-l-lg px-3 outline-none duration-150  py-1.5"
         value={todo}
         onChange={(e) => setTodo(e.target.value)}
       />

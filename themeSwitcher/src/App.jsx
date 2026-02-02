@@ -11,7 +11,7 @@ function App() {
     setThemeMode("light");
   };
 
-  const darkTheme = () => {
+  const darkTheme = () => { 
     setThemeMode("dark");
   };
 
