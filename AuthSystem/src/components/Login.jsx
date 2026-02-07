@@ -25,6 +25,7 @@ function Profile() {
         />
         <input
           type="password"
+          className=""
           placeholder="Password"
           onChange={(e) => {
             setPassword(e.target.value);
