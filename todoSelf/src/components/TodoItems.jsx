@@ -20,28 +20,35 @@ function TodoItems({ todo }) {
 
   return (
     <div
-      className={`flex border border-black/10 rounded-lg px-3 py-1.5 gap-x-3 shadow-sm shadow-white/50 duration-300 text-black ${
-        todo.completed ? "bg-[#c6e9a7]" : "bg-[#ccbed7]"
-      }`}
+      className={`flex items-center gap-3 p-3 rounded-2xl shadow-sm border transition
+  ${
+    todo.completed
+      ? "bg-green-50 border-green-200"
+      : "bg-white border-gray-200 hover:shadow-md"
+  }`}
     >
+      {/* Checkbox */}
       <input
         type="checkbox"
-        className="cursor-pointer"
+        className="w-5 h-5 cursor-pointer accent-black"
         checked={todo.completed}
         onChange={toggleCompleted}
       />
+
+      {/* Todo Text */}
       <input
         type="text"
-        className={`border outline-none w-full bg-transparent rounded-lg ${
-          isTodoEditable ? "border-black/10 px-2" : "border-transparent"
-        } ${todo.completed ? "line-through" : ""}`}
+        className={`flex-1 bg-transparent outline-none text-sm
+    ${isTodoEditable ? "border-b border-gray-300 pb-1" : ""}
+    ${todo.completed ? "line-through text-gray-400" : "text-gray-800"}`}
         value={todoMsg}
         onChange={(e) => setTodoMsg(e.target.value)}
         readOnly={!isTodoEditable}
       />
 
+      {/* Edit / Save Button */}
       <button
-        className="inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 disabled:opacity-50"
+        className="px-3 py-1 rounded-lg text-xs font-medium bg-gray-100 hover:bg-gray-200 transition disabled:opacity-40"
         onClick={() => {
           if (todo.completed) return;
 
@@ -51,11 +58,12 @@ function TodoItems({ todo }) {
         }}
         disabled={todo.completed}
       >
-        {isTodoEditable ? "save" : "edit"}
+        {isTodoEditable ? "Save" : "Edit"}
       </button>
 
+      {/* Delete Button */}
       <button
-        className="inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0"
+        className="px-3 py-1 rounded-lg text-xs font-medium bg-red-50 text-red-600 hover:bg-red-100 transition"
         onClick={() => deleteTodo(todo.id)}
       >
         Delete

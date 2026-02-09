@@ -5,6 +5,7 @@ import TodoForms from "./components/TodoForms";
 import TodoItems from "./components/TodoItems";
 
 function App() {
+  const [filter, setFilter] = useState("all");
   const [todos, setTodos] = useState([]);
 
   const addTodo = (todo) => {
@@ -16,6 +17,12 @@ function App() {
       prev.map((prevtodo) => (prevtodo.id === id ? todo : prevtodo)),
     );
   };
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "completed") return todo.completed;
+    if (filter === "pending") return !todo.completed;
+    return true;
+  });
 
   const deleteTodo = (id) => {
     setTodos((prev) => prev.filter((todo) => todo.id != id));
@@ -53,18 +60,59 @@ function App() {
     <>
       <div>
         <TodoProvider
-          value={{ todos, addTodo, updateTodo, deleteTodo, toggleComplete }}
+          value={{
+            todos,
+            addTodo,
+            updateTodo,
+            deleteTodo,
+            toggleComplete,
+          }}
         >
           <div>
-            <TodoForms />
-          </div>
+            <button
+              className={`px-4 py-2 rounded-full text-sm font-medium transition
+      ${
+        filter === "all"
+          ? "bg-black text-white shadow"
+          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+      }`}
+              onClick={() => setFilter("all")}
+            >
+              All
+            </button>
+            <button
+              className={`px-4 py-2 rounded-full text-sm font-medium transition
+      ${
+        filter === "completed"
+          ? "bg-green-600 text-white shadow"
+          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+      }`}
+              onClick={() => setFilter("completed")}
+            >
+              Completed
+            </button>
+            <button
+              className={`px-4 py-2 rounded-full text-sm font-medium transition
+      ${
+        filter === "pending"
+          ? "bg-yellow-500 text-white shadow"
+          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+      }`}
+              onClick={() => setFilter("pending")}
+            >
+              Pending
+            </button>
+            <div>
+              <TodoForms />
+            </div>
 
-          <div className="flex flex-wrap gap-y-3">
-            {todos.map((todo) => (
-              <div key={todo.id} className="w-full">
-                <TodoItems todo={todo} />
-              </div>
-            ))}
+            <div className="flex flex-wrap gap-y-3">
+              {filteredTodos.map((todo) => (
+                <div key={todo.id} className="w-full">
+                  <TodoItems todo={todo} />
+                </div>
+              ))}
+            </div>
           </div>
         </TodoProvider>
       </div>
