@@ -2,7 +2,7 @@ import React from "react";
 
 function Navigation() {
   return (
-    <nav className="flex justify-between items-center px-8 py-4">
+    <nav className="flex justify-between items-center px-8">
       {/* Logo */}
       <div className="logo flex items-center">
         <img
